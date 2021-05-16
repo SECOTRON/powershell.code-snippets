@@ -129,7 +129,7 @@
         
         "Foreach parallel statement": {
             "scope": "powershell",
-            "prefix": "foreachparallel",
+            "prefix": "foreachpar",
             "body":[
                 "$${1:inputobject} | ForEach-Object -Parallel {",
                 "\t$0 \\$_",
