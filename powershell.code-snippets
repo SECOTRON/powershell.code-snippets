@@ -1,0 +1,406 @@
+{
+    // #############################################################################
+    // #################### SECOTRON PowerShell Snippets VSCode ####################
+    // #############################################################################
+    //                                                                        v1.0.0
+    //
+    // Download from:
+    //    -  https://github.com/SECOTRON/powershell.code-snippets.git
+    //
+    // Installation:
+    //    - Windows, copy to '%APPDATA%\Code\User\Snippets'
+    //    - Linux, copy to '~\AppData\Roaming\Code\User\Snippets'
+    //
+    // Author(s):
+    //    - thomas.geens@secotron.eu
+    //    - r_keith_hill@hotmail.com
+    //
+    // Description:
+    //
+    // Place your PowerShell snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
+	// Placeholders with the same ids are connected.
+	// Example:
+	// "Hello name to console": {
+	// 	"scope": "powershell",
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"$${1:messagevar} = 'Hello to '",
+    //      "\\$name = '${2:name}'
+    // 		"Write-Host \"$$1\$name\, $anothermessage"",
+	//      "",
+    //      "$0            # End here"
+	// 	],
+	// 	"description": "Log output hello name to console"
+	// }
+        "Condition statement": {
+            "scope": "powershell",
+            "prefix": "cond",
+            "body": [
+                "${1:condition} { $2; break }$0"
+            ],
+            "description": "Switch condition statement"
+        },
+
+        "Condition single quoted string statement": {
+            "scope": "powershell",
+            "prefix": "condsqstr",
+            "body": [
+                "'${1:condition}' { $2; break }$0"
+            ],
+            "description": "Switch condition single quoted string statement"
+        },
+
+        "Condition double quoted string statement": {
+            "scope": "powershell",
+            "prefix": "conddqstr",
+            "body": [
+                "\"${1:condition}\" { $2; break }$0"
+            ],
+            "description": "Switch condition double quoted string statement"
+        },
+        
+        "Condition expression statement": {
+            "scope": "powershell",
+            "prefix": "condexpr",
+            "body": [
+                "{${1:condition}} { $2; break }$0"
+            ],
+            "description": "Switch condition expression statement"
+        },
+
+        "Do...while loop": {
+            "scope": "powershell",
+            "prefix": "do",
+            "body": [
+                "do {",
+                "\t$0",
+                "} while ($${1:condition});"
+            ],
+            "description": "Do...while loop"
+        },
+
+        "Do...until loop": {
+            "scope": "powershell",
+            "prefix": "do",
+            "body": [
+                "do {",
+                "\t$0",
+                "} until ($${1:condition});"
+            ],
+            "description": "Do...until loop"
+        },
+
+        "Else statement": {
+            "scope": "powershell",
+            "prefix": "else",
+            "body": [
+                "else {",
+                "\t$0",
+                "}"
+            ],
+            "description": "Else statement"
+        },
+
+        "ElseIf statement": {
+            "scope": "powershell",
+            "prefix": "elseif",
+            "body": [
+                "elseif ($${1:condition}) {",
+                "\t$0",
+                "}"
+            ],
+            "description": "Elseif statement"
+        },
+
+        "Foreach statement": {
+            "scope": "powershell",
+            "prefix": "foreach",
+            "body": [
+                "foreach ($${1:item} in $${2:collection}) {",
+                "\t$0 $$1",
+                "}"
+            ],
+            "description": "Foreach statement"
+        },
+        
+        "Foreach parallel statement": {
+            "scope": "powershell",
+            "prefix": "foreachparallel",
+            "body":[
+                "$${1:inputobject} | ForEach-Object -Parallel {",
+                "\t$0 \\$_",
+                "} -ThrottleLimit $throttlelimit"
+            ],
+            "description": "Foreach parallel statement"
+        },
+        
+        "Foreach parallel advanced statement": {
+            "scope": "powershell",
+            "prefix": "foreachparadv",
+            "body":[
+                "$${1:outputdict} = [System.Collections.Concurrent.ConcurrentDictionary[string,object]]::new()",
+                "$${2:inputobject} | ForEach-Object -Parallel {",
+                "\\$$1Synced = \\$using:$1",
+                "\t$${4:key} = \\$_.ToString()\t\t\t\t\t\t\t# [string]key",
+                "\t$${5:value} = \\$_\t\t\t\t\t\t\t\t\t\t# [object]value",
+                "\t$0",
+                "[void] \\$$1Synced.TryAdd(\\$$4, \\$$5)\t\t# [string]key = [object]value",
+                "} -ThrottleLimit ${3:throttlelimit}",
+                "",
+                "$$1"
+
+            ],
+            "description": "Advanced foreach parallel statement"
+        },
+
+        "For loop": {
+            "scope": "powershell",
+            "prefix": "for",
+            "body": [
+                "for ($${1:i} = 0; $1 -lt $${2:array.count}; $$1++) {",
+                "\t$0 $$i",
+                "}"
+            ],
+            "description": "For loop"
+        },
+
+        "If statement": {
+            "scope": "powershell",
+            "prefix": "if",
+            "body": [
+                "if ($${1:condition}) {",
+                "\t$0",
+                "}"
+            ],
+            "description": "If statement"
+        },
+
+        "Reverse for loop": {
+            "scope": "powershell",
+            "prefix": "forr",
+            "body": [
+                "for ($${1:i} = $${2:array.count} - 1; $$1 -ge 0; $$1--) {",
+                "\t$0 $$i",
+                "}"
+            ],
+            "description": "Reverse for loop"
+        },
+
+        "Switch statement": {
+            "scope": "powershell",
+            "prefix": "switch",
+            "body": [
+                "switch ($${1:variable}) {",
+                "\t${2:condition} {",
+                "\t$1",
+                "\tbreak",
+                "\t}",
+                "\tDefault {",
+                "\t$0}",
+                "}"
+            ],
+            "description": "Switch statement"
+        },
+
+        "Try catch": {
+            "scope": "powershell",
+            "prefix": "try",
+            "body": [
+                "try {",
+                "\t$0",
+                "}",
+                "catch [${1:System.Exception}] {",
+                "\t# Exception is stored in the automatic variable \\$_",
+                "\t\\$_",
+                "}"
+            ],
+            "description": "Try catch"
+        },
+
+        "Try catch finally": {
+            "scope": "powershell",
+            "prefix": "trycf",
+            "body": [
+                "try {",
+                "\t$0",
+                "}",
+                "catch [${1:System.Exception}] {",
+                "\t# Exception is stored in the automatic variable \\$_",
+                "\t\\$_",
+                "}",
+                "finally {",
+                "\t",
+                "}"        ],
+            "description": "Try catch finally"
+        },
+
+        "Try finally": {
+            "scope": "powershell",
+            "prefix": "tryf",
+            "body": [
+                "try {",
+                "\t$0",
+                "}",
+                "finally {",
+                "\t",
+                "}"
+            ],
+            "description": "Try finally"
+        },
+
+        "While loop": {
+            "scope": "powershell",
+            "prefix": "while",
+            "body": [
+                "while ($${1:condition}) {",
+                "\t$0",
+                "}"
+            ],
+            "description": "While loop"
+        },
+
+        "Class": {
+            "scope": "powershell",
+            "prefix": "class",
+            "body": [
+                "class ${1:Name} {",
+                "\t$0",
+                "}"
+            ],
+            "description": "Class"
+        },
+
+        "Enum": {
+            "scope": "powershell",
+            "prefix": "enum",
+            "body": [
+                "enum ${1:Name} {",
+                "\t$0",
+                "}"
+            ],
+            "description": "Enum"
+        },
+
+        "Method": {
+            "scope": "powershell",
+            "prefix": "meth",
+            "body": [
+                "[${1:string}] ${2:Name}($${3:arg1}) {",
+                "\t$0",
+                "}"
+            ],
+            "description": "Method"
+        },
+
+        "Property": {
+            "scope": "powershell",
+            "prefix": "prop",
+            "body": [
+                "[${1:string}]$${2:Property}$0"
+            ],
+            "description": "Class property"
+        },
+
+        "Property hidden": {
+            "scope": "powershell",
+            "prefix": "proph",
+            "body": [
+                "hidden [${1:string}]$${2:Property}$0"
+            ],
+            "description": "Hidden class property"
+        },
+
+        "Function": {
+            "scope": "powershell",
+            "prefix": "func",
+            "body": [
+                "function ${1:Name}() {",
+                "\t$0",
+                "}"
+            ],
+            "description": "Function"
+        },
+
+        "Function advanced": {
+            "scope": "powershell",
+            "prefix": "funcadv",
+            "body": [
+                "<#",
+                ".SYNOPSIS",
+                "\tShort description",
+                ".DESCRIPTION",
+                "\tLong description",
+                ".EXAMPLE",
+                "\tExample of how to use this cmdlet",
+                ".EXAMPLE",
+                "\tAnother example of how to use this cmdlet",
+                "#>",
+                "function ${1:Verb}-${2:Noun} {",
+                "\t[CmdletBinding()]",
+                "\t[OutputType([${3:int}])]",
+                "\tparam(",
+                "\t\t[Parameter(Mandatory=\\$true)]",
+                "\t\t[${4:string}]",
+                "\t\t$${5:Param1}",
+                "\t)",
+                "\t",
+                "\tbegin {",
+                "\t}",
+                "\t",
+                "\tprocess {",
+                "\t\t\\$output = $0 \\$$5",
+                "\t\treturn \\$output",
+                "\t}",
+                "\t",
+                "\tend {",
+                "\t}",
+                "}"
+            ],
+            "description": "Advanced function"
+        },
+
+        "Help": {
+            "scope": "powershell",
+            "prefix": "help",
+            "body": [
+                "<#",
+                ".SYNOPSIS",
+                "\tShort description",
+                ".DESCRIPTION",
+                "\tLong description",
+                ".PARAMETER Path",
+                "\tSpecifies a path to one or more locations.",
+                ".PARAMETER LiteralPath",
+                "\tSpecifies a path to one or more locations. Unlike Path, the value of LiteralPath is used exactly as it",
+                "\tis typed. No characters are interpreted as wildcards. If the path includes escape characters, enclose",
+                "\tit in single quotation marks. Single quotation marks tell Windows PowerShell not to interpret any",
+                "\tcharacters as escape sequences.",
+                ".PARAMETER InputObject",
+                "\tSpecifies the object to be processed.  You can also pipe the objects to this command.",
+                ".EXAMPLE",
+                "\tC:\\PS>",
+                "\tExample of how to use this cmdlet",
+                ".EXAMPLE",
+                "\tC:\\PS>",
+                "\tAnother example of how to use this cmdlet",
+                ".INPUTS",
+                "\tInputs to this cmdlet (if any)",
+                ".OUTPUTS",
+                "\tOutput from this cmdlet (if any)",
+                ".NOTES",
+                "\tGeneral notes",
+                ".COMPONENT",
+                "\tThe component this cmdlet belongs to",
+                ".ROLE",
+                "\tThe role this cmdlet belongs to",
+                ".FUNCTIONALITY",
+                "\tThe functionality that best describes this cmdlet",
+                "#>"
+            ],
+            "description": "Help comment block"
+        }
+    }
